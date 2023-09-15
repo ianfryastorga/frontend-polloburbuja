@@ -20,9 +20,9 @@ nav ul {
   list-style-type: none;
 }
 
-img {
-  width: 200px;
-  height: 200px;
+#pollo{
+  width: 300px;
+  height: 300px;
   animation: rotar 7s linear infinite;
 }
 nav {
@@ -65,4 +65,11 @@ h1 {
 @keyframes rotar {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.carousel .carousel-image {
+  width: auto;
+  height: 40vh;
+  object-fit: contain;
+
 }
