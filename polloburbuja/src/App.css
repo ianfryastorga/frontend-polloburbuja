@@ -73,3 +73,24 @@ h1 {
   object-fit: contain;
 
 }
+
+.carousel {
+  background-image: linear-gradient(to top, rgba(69, 209, 150, 0.5) , rgba(217, 217, 217, 0.5));
+  border: 1px solid #000;
+  height: 40vh;
+  width: 100vw;
+}
+
+.carousel h1{
+  text-align: center;
+
+}
+
+.carousel p{
+  text-align: left;
+  padding: 0 1rem;
+  font-style: bold;
+  font-size: 30px;
+  color: black;
+
+}
