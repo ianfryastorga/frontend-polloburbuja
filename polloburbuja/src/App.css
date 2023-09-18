@@ -209,3 +209,114 @@ h3 {
   width: 200px;
   height: 200px;
 }
+
+.join-container {
+  position: absolute;
+  width: 600px;
+  height: 300px;
+  border: solid black;
+  background-image:
+  linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-codigo {
+  display: block;
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.boton-enviar {
+  display: block;
+  width: 50%;
+  padding: 10px;
+  border: solid black;
+  background-image:
+  linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
+}
+
+#test{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 30px;
+}
+
+.player {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border: solid black;
+  background-image:
+  linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
+  
+}
+
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.casilla {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+}
+
+.amarillo {
+  background-color: yellow;
+}
+
+.azul {
+  background-color: blue;
+}
+
+.rojo {
+  background-color: red;
+}
+
+.verde {
+  background-color: green;
+}
+
+.flecha {
+  font-size: 40px;
+  color:#000;
+}
+
+.picture{
+  width: 30px;
+  height: 30px;
+}
+.icons{
+  width: 20px;
+  height: 20px;
+  padding:3px;
+}
+
+.puntos{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 16px;
+}
+
+.puntos div {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.puntos p {
+  margin-left: 10px;
+}
