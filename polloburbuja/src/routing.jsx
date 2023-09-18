@@ -6,6 +6,8 @@ import AboutUs from "./aboutus.jsx"
 import Rank from "./user/rank.jsx"
 import Login from "./user/login.jsx"
 import Register from "./user/register.jsx"
+import CreateGame from "./game/create_game.jsx"
+import JoinGame from "./game/join_game.jsx"
 
 function Routing(){
     return (
@@ -19,6 +21,8 @@ function Routing(){
                 <Route path="/rank" element={<Rank/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/register" element={<Register/>} />
+                <Route path="/create_game" element={<CreateGame/>} />
+                <Route path="/join_game" element={<JoinGame/>} />
             </Routes>
         </BrowserRouter>
         </>
