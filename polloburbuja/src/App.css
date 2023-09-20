@@ -1,3 +1,5 @@
+/* Aspectos generales */
+
 #root {
   max-width: 1280px;
   width: 100%;
@@ -12,6 +14,8 @@
   background-size: cover;
   display: flex;
   flex-direction: column;
+  position: relative;
+
 }
 
 nav ul {
@@ -20,10 +24,23 @@ nav ul {
   list-style-type: none;
 }
 
-#pollo{
-  width: 300px;
-  height: 300px;
-  animation: rotar 7s linear infinite;
+h1 {
+  color: rgb(255, 255, 255);
+  text-shadow: -1px -1px 0 #000,  
+                1px -1px 0 #000,
+               -1px 1px 0 #000,
+                1px 1px 0 #000;
+   font-weight: bold;
+   font-style: italic;
+}
+
+h3 {
+  color: rgb(255, 255, 255);
+  text-shadow: -1px -1px 0 #000,  
+                1px -1px 0 #000,
+               -1px 1px 0 #000,
+                1px 1px 0 #000;
+   font-weight: bold;
 }
 
 nav {
@@ -44,28 +61,36 @@ nav ul li button {
   cursor: pointer;
 }
 
-h1 {
-  color: rgb(255, 255, 255);
-  text-shadow: -1px -1px 0 #000,  
-                1px -1px 0 #000,
-               -1px 1px 0 #000,
-                1px 1px 0 #000;
-   font-weight: bold;
-   font-style: italic;
+.centro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 20vh);
 }
 
-.centro {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   height: calc(100vh - 20vh);
+.active {
+  color: black;
+}
+
+.link {
+  color: white;
+}
+
+/* Landing page */
+
+#pollo{
+  width: 300px;
+  height: 300px;
+  animation: rotar 7s linear infinite;
 }
 
 @keyframes rotar {
    from { transform: rotate(0deg); }
    to { transform: rotate(360deg); }
 }
+
+/* Rules */
 
 .carousel .carousel-image {
    width: auto;
@@ -101,6 +126,9 @@ h1 {
   padding: 0 1rem;
 
 }
+
+/* Rules Responsive */
+
 @media (max-width: 600px) {
   nav ul {
     flex-direction: row;
@@ -120,6 +148,8 @@ h1 {
 
 }
 
+/* Game */ 
+
 .button-container {
   display: flex;
   justify-content: space-around;  
@@ -135,19 +165,7 @@ h1 {
   margin: 0 20px;
 }
 
-.active {
-  color: black;
-}
-
-.link {
-  color: white;
-}
-
-
-.fondo {
-  position: relative;
-}
-
+/* Tablero */
 .jugador {
   position: absolute;
   width: 300px;
@@ -180,70 +198,6 @@ h1 {
   right: 0;
   margin: 30px;
 
-}
-
-h3 {
-  color: rgb(255, 255, 255);
-  text-shadow: -1px -1px 0 #000,  
-                1px -1px 0 #000,
-               -1px 1px 0 #000,
-                1px 1px 0 #000;
-   font-weight: bold;
-}
-
-#centro {
-  top: 410px;
-  height: 300px;
-  width: 300px;
-  height: 100px;
-  margin: 30px;
-}
-
-#loading{
-  width: 200px;
-  height: 200px;
-  animation: rotar 5s linear infinite;
-}
-
-#amongus{
-  width: 200px;
-  height: 200px;
-}
-
-.join-container {
-  position: absolute;
-  width: 600px;
-  height: 300px;
-  border: solid black;
-  background-image:
-  linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.input-codigo {
-  display: block;
-  width: 80%;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.boton-enviar {
-  display: block;
-  width: 50%;
-  padding: 10px;
-  border: solid black;
-  background-image:
-  linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
-}
-
-#test{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 30px;
 }
 
 .player {
@@ -286,7 +240,7 @@ h3 {
 }
 
 .verde {
-  background-color: green;
+  background-color: rgb(28, 226, 28);
 }
 
 .flecha {
@@ -320,3 +274,163 @@ h3 {
 .puntos p {
   margin-left: 10px;
 }
+
+.interfaz {
+  position: absolute;
+  width: 90vh;
+  height: 100px;
+  border: solid black;
+  background-image:
+  linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+.dado, .tienda, .fuego, .gandalf, .fantasma, .patricio, .toreto, .salir {
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+
+
+.overlay {
+  position: relative;
+  display: inline-block;
+}
+
+.overlay img {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  transition: filter 0.3s ease-in-out;
+}
+
+.overlay-text {
+  position: absolute;
+  top: -20px; 
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  font-style: italic;
+  font-weight: bold;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px; 
+  border: 1px solid black; 
+  border-radius: 5px; 
+  z-index: 1; 
+}
+
+.overlay:hover img {
+  filter: brightness(0.5);
+}
+
+.overlay:hover .overlay-text {
+  opacity: 1;
+}
+
+.dado-jugable {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  padding-top: 150px;
+}
+
+.rolling {
+  animation-name: rollDice;
+  animation-duration: 5s;
+  animation-timing-function: steps(12); 
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-direction: alternate; 
+}
+
+
+.timer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  font-size: 24px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 5px; 
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+  transition: background-color 0.3s ease-in-out; 
+}
+
+.timer.warning {
+  background-color: rgba(255, 0, 0, 0.7); 
+}
+
+/* Create Game */
+
+#centro {
+  top: 410px;
+  height: 300px;
+  width: 300px;
+  height: 100px;
+  margin: 30px;
+}
+
+#loading{
+  width: 200px;
+  height: 200px;
+  animation: rotar 5s linear infinite;
+}
+
+#amongus{
+  width: 200px;
+  height: 200px;
+}
+
+/* Join Game */
+
+.join-container {
+  position: absolute;
+  width: 600px;
+  height: 300px;
+  border: solid black;
+  background-image:
+  linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-codigo {
+  display: block;
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.boton-enviar {
+  display: block;
+  width: 50%;
+  padding: 10px;
+  border: solid black;
+  background-image:
+  linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
+}
+
+#test{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 30px;
+}
+
+
+
