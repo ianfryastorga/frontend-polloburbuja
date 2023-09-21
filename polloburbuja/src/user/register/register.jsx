@@ -1,4 +1,4 @@
-import Layout from '../layout.jsx'
+import Layout from '../../layout.jsx'
 
 function Register() {
   return (

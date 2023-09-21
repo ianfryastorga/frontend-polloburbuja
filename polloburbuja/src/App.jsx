@@ -8,7 +8,7 @@ function App() {
   return (
     <Layout>
       <h1>¡BIENVENIDO AL JUEGO POLLOBURBUJA!</h1>
-      <img src={icono} alt="icono"/>
+      <img id='pollo' src={icono} alt="icono"/>
     </Layout>
   );
 }
