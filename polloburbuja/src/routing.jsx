@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import App from "./App.jsx"
-import Rules from "./game/rules.jsx"
-import Play from "./game/play.jsx"
-import AboutUs from "./aboutus.jsx"
-import Rank from "./user/rank.jsx"
-import Login from "./user/login.jsx"
-import Register from "./user/register.jsx"
-import CreateGame from "./game/create_game.jsx"
-import JoinGame from "./game/join_game.jsx"
-import Tablero from "./game/tablero.jsx"
+import Rules from "./game/rules/rules"
+import Play from "./game/game_party/play/play"
+import AboutUs from "./game/about_us/aboutus"
+import Rank from "./user/rank/rank"
+import Login from "./user/login/login"
+import Register from "./user/register/register"
+import CreateGame from "./game/game_party/create_game/create_game"
+import JoinGame from "./game/game_party/join_game/join_game"
+import Tablero from "./game/board/tablero"
 
 function Routing(){
     return (

@@ -1,4 +1,5 @@
-import Layout from '../layout.jsx'
+import Layout from '../../../layout.jsx'
+import "./join_game.css"
 
 function JoinGame() {
   return (
