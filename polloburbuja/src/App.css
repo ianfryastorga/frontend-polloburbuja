@@ -1,3 +1,5 @@
+/* Aspectos generales */
+
 #root {
   max-width: 1280px;
   width: 100%;
@@ -12,6 +14,8 @@
   background-size: cover;
   display: flex;
   flex-direction: column;
+  position: relative;
+
 }
 
 nav ul {
@@ -20,10 +24,23 @@ nav ul {
   list-style-type: none;
 }
 
-#pollo{
-  width: 300px;
-  height: 300px;
-  animation: rotar 7s linear infinite;
+h1 {
+  color: rgb(255, 255, 255);
+  text-shadow: -1px -1px 0 #000,  
+                1px -1px 0 #000,
+               -1px 1px 0 #000,
+                1px 1px 0 #000;
+   font-weight: bold;
+   font-style: italic;
+}
+
+h3 {
+  color: rgb(255, 255, 255);
+  text-shadow: -1px -1px 0 #000,  
+                1px -1px 0 #000,
+               -1px 1px 0 #000,
+                1px 1px 0 #000;
+   font-weight: bold;
 }
 
 nav {
@@ -44,22 +61,28 @@ nav ul li button {
   cursor: pointer;
 }
 
-h1 {
-  color: rgb(255, 255, 255);
-  text-shadow: -1px -1px 0 #000,  
-                1px -1px 0 #000,
-               -1px 1px 0 #000,
-                1px 1px 0 #000;
-   font-weight: bold;
-   font-style: italic;
+.centro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 20vh);
 }
 
-.centro {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   height: calc(100vh - 20vh);
+.active {
+  color: black;
+}
+
+.link {
+  color: white;
+}
+
+/* Landing page */
+
+#pollo{
+  width: 40vh;
+  height: 40vh;
+  animation: rotar 7s linear infinite;
 }
 
 @keyframes rotar {
@@ -67,55 +90,13 @@ h1 {
    to { transform: rotate(360deg); }
 }
 
-.carousel .carousel-image {
-   width: auto;
-   height: auto; 
-   object-fit: contain;
 
-}
+/* Responsive */
 
-.carousel {
-   background-image:
-      linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.5));
-   border: solid black; 
-   height:auto; 
-}
-
-.carousel h1{
-   text-align:center;
-
-}
-
-.carousel p{
-   text-align:left; 
-   padding-left :1rem; 
-   font-weight:bold; 
-   font-size :30px; 
-   color:black;
-
-}
-
-
-#minigame {
-  font-size: 18px;
-  padding: 0 1rem;
-
-}
 @media (max-width: 600px) {
   nav ul {
     flex-direction: row;
     align-items: center;
     font-size: 0.6rem;
   }
-  .carousel{
-    height: auto;
-    font-size: 0.5rem;
-  }
-  .carousel p{
-    font-size: 0.8rem;
-  }
-  #minigame{
-    font-size: 0.7rem;
-  }
-
 }
