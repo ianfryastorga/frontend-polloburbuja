@@ -3,7 +3,7 @@
 .register_container {
     position: absolute;
     width: 60vh;
-    height: 50vh;
+    height: 70vh;
     border: solid black;
     background-image:
     linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
@@ -48,7 +48,7 @@
   
 
   @media (max-width: 600px) {
-    .join-container{
+    .register_container{
       width: auto;
       height: auto;
       padding: 3vh;
