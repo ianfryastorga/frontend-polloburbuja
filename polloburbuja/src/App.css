@@ -66,21 +66,3 @@ h1 {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-.container-rank {
-  margin: auto;
-  border: 1px solid #000;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(46, 204, 113, 0.5));
-  width: 600px;
-  height: 500px;
-  color: black;
-  font-size: larger;
-  font-weight: bolder;
-}
-
-.container-rank ol {
-  margin: 5%;
-  text-align: left;
-  padding-left: 5%;
-  list-style-position: inside;
-}

@@ -3,7 +3,7 @@ import App from "./App.jsx"
 import Rules from "./game/rules.jsx"
 import Play from "./game/play.jsx"
 import AboutUs from "./aboutus.jsx"
-import Rank from "./user/rank.jsx"
+import Rank from "./user/rank/rank.jsx"
 import Login from "./user/login.jsx"
 import Register from "./user/register.jsx"
 
