@@ -1,4 +1,5 @@
 import Layout from '../../layout.jsx'
+import './login.css'
 
 function Login() {
   return (

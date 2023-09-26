@@ -3,7 +3,7 @@
 .login_container {
     position: absolute;
     width: 60vh;
-    height: 30vh;
+    height: 50vh;
     border: solid black;
     background-image:
     linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
@@ -29,10 +29,10 @@
   .boton_login {
     display: block;
     width: 50%;
-    padding: 10px;
     border: solid black;
     background-image:
     linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
+    margin: 5%;
   }
   
 
