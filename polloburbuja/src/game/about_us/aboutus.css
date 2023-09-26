@@ -1,0 +1,30 @@
+/* About Us */
+
+.container-aboutus {
+    margin: auto;
+    border: 1px solid #000;
+    background-image: linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
+    width: 80%;
+    height: 90%;
+    color: black;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.aboutus-grid {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    height: 80%;
+}
+
+.container-grids h3 {
+    border-bottom: 1px dashed #000;
+    margin: 8%;
+}
+
+.container-grids ul {
+    margin: 5%;
+    text-align: left;
+    padding-left: 5%;
+    list-style-position: inside;
+}
