@@ -24,6 +24,7 @@ function AboutUs() {
               <p> - Christ711 </p>
             </div>
         </div>
+        <h3> Institución: Pontificia Universidad Católica de Chile</h3>
       </div>
     </Layout>
   )
