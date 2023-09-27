@@ -1,9 +1,6 @@
 import Layout from '../../layout.jsx'
-<<<<<<< HEAD
 import './register.css'
-=======
-import './register.css'; // Ruta al archivo CSS
->>>>>>> 1ba82ec (css)
+
 
 function Register() {
   return (
