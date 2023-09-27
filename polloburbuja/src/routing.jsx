@@ -1,11 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import App from "./App.jsx"
-import Rules from "./game/rules.jsx"
-import Play from "./game/play.jsx"
-import AboutUs from "./game/about_us/aboutus.jsx"
-import Rank from "./user/rank.jsx"
-import Login from "./user/login.jsx"
-import Register from "./user/register.jsx"
+import Rules from "./game/rules/rules"
+import Play from "./game/game_party/play/play"
+import AboutUs from "./game/about_us/aboutus"
+import Rank from "./user/rank/rank"
+import Login from "./user/login/login"
+import Register from "./user/register/register"
+import CreateGame from "./game/game_party/create_game/create_game"
+import JoinGame from "./game/game_party/join_game/join_game"
+import Tablero from "./game/board/tablero"
 
 function Routing(){
     return (
@@ -19,6 +22,9 @@ function Routing(){
                 <Route path="/rank" element={<Rank/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/register" element={<Register/>} />
+                <Route path="/create_game" element={<CreateGame/>} />
+                <Route path="/join_game" element={<JoinGame/>} />
+                <Route path="/tablero" element={<Tablero/>} />
             </Routes>
         </BrowserRouter>
         </>
