@@ -1,0 +1,52 @@
+/* About Us */
+
+.container-aboutus {
+    margin: auto;
+    border: solid black; 
+    background-image: linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
+    width: 80%;
+    height: 90%;
+}
+
+.container-aboutus h1 {
+    text-align: center;
+}
+
+.container-aboutus h3 {
+    text-align:center; 
+    font-weight:bold; 
+    font-size : 4vh; 
+    color:black;
+}
+
+.aboutus-grid {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    height: 80%;
+}
+
+.container-grids h3 {
+    border-bottom: dashed #000;
+    margin: 8%;
+    text-align:center; 
+    font-weight:bold; 
+    font-size : 3vh; 
+    color:black;
+}
+
+.container-grids p {
+    text-align:center; 
+    font-weight:bold; 
+    font-size : 3vh; 
+    color:black;
+}
+
+@media (max-width: 600px) {
+    .container-aboutus{
+        height: auto;
+        font-size: 0.5rem;
+    }
+    .container-grids p{
+        font-size: 0.8rem;
+    }
+}
