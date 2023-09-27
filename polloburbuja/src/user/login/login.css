@@ -37,7 +37,7 @@
   
 
   @media (max-width: 600px) {
-    .join-container{
+    .login_container{
       width: auto;
       height: auto;
       padding: 3vh;
