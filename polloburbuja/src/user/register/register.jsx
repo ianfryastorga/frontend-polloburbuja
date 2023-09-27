@@ -1,5 +1,9 @@
 import Layout from '../../layout.jsx'
+<<<<<<< HEAD
 import './register.css'
+=======
+import './register.css'; // Ruta al archivo CSS
+>>>>>>> 1ba82ec (css)
 
 function Register() {
   return (
@@ -23,7 +27,6 @@ function Register() {
         <button type = "submit" className='boton_register'>
           Registrarse
         </button>
-
       </div>
     </Layout>
   )
