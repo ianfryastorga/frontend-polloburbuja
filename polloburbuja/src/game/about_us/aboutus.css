@@ -1,49 +1,56 @@
 /* About Us */
 
 .container-aboutus {
-    margin: auto;
     border: solid black; 
     background-image: linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
-    width: 80%;
-    height: 90%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .container-aboutus h1 {
     text-align: center;
+    margin: 2rem;
 }
 
 .container-aboutus h3 {
-    text-align:center; 
-    font-weight:bold; 
-    font-size: 3.5vh; 
-    color: #000;
+    text-align: center; 
+    font-weight: bold; 
+    font-size: 4vh; 
+    color: white;
+    margin: 1rem;
 }
 
 .aboutus-grid {
     display: grid;
     grid-template-columns: 33.3% 33.3% 33.3%;
-    height: 40%;
 }
 
 .container-grids h3 {
     border-bottom: dashed #000;
-    margin: 6%;
+    margin: 0.25rem;
     font-style: italic;
 }
 
 .container-grids p {
-    text-align:center; 
-    font-weight:bold; 
-    font-size : 3vh; 
-    color:black;
+    text-align: center; 
+    font-weight: bold; 
+    font-size: 3vh; 
+    color: black;
 }
 
 @media (max-width: 600px) {
     .container-aboutus{
+        width: auto;
         height: auto;
         font-size: 0.5rem;
     }
-    .container-grids p{
+    .container-aboutus h3 {
         font-size: 0.8rem;
+    }
+    .container-grids p{
+        font-size: 0.6rem;
     }
 }
