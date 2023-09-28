@@ -1,4 +1,5 @@
 import './App.css';
+import { NavLink } from 'react-router-dom';
 import icono from './assets/img/chicken.png';
 
 function Layout({ children }) {
@@ -6,20 +7,20 @@ function Layout({ children }) {
     <div className='fondo'>
       <nav>
         <ul>
-          <li><a href='/'><button>HOME</button></a></li>
-          <li><a href='/rules'><button>RULES</button></a></li>
-          <li><a href='/play'><button>PLAY</button></a></li>
-          <li><a href='/aboutus'><button>ABOUT US</button></a></li>
-          <li><a href='/rank'><button>RANK</button></a></li>
-          <li><a href='/login'><button>LOGIN</button></a></li>
-          <li><a href='/register'><button>REGISTER</button></a></li>
+          <li><NavLink to='/' activeClassName='active' >HOME</NavLink></li>
+          <li><NavLink to='/rules' activeClassName='active'>RULES</NavLink></li>
+          <li><NavLink to='/play' activeClassName='active'>PLAY</NavLink></li>
+          <li><NavLink to='/aboutus' activeClassName='active'>ABOUT US</NavLink></li>
+          <li><NavLink to='/rank' activeClassName='active'>RANK</NavLink></li>
+          <li><NavLink to='/login' activeClassName='active'>LOGIN</NavLink></li>
+          <li><NavLink to='/register' activeClassName='active'>REGISTER</NavLink></li>
         </ul>
       </nav>
       <div className='centro'>
         {children}
       </div>
     </div>
-  );
+  )
 }
 
 export default Layout;

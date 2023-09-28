@@ -1,0 +1,27 @@
+/* Game */ 
+
+.button-container {
+    display: flex;
+    justify-content: space-around;  
+    
+  }
+  
+  .gradient-button {
+    background-image:
+      linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.5));
+    border: solid black;
+    padding: auto auto; 
+    text-align: center;
+    margin: 0 2vh;
+  }
+
+  .button-play{
+    font-size: 6vh;
+  }
+
+  @media (max-width: 600px) {
+    .button-play{
+      font-size: 4vh;
+    }
+  }
+    
