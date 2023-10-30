@@ -88,31 +88,34 @@ function Tablero() {
 
   const handleDadoClick = () => {
     setRollingDice(true);
-    setTimerActive(true);
-    setTimer(20);
   
     let animationTimeout = setTimeout(() => {
       let interval = setInterval(() => {
         var randomNum = Math.floor(Math.random() * 6);
         setImage(diceImages[randomNum]);
-      }, 100); 
+      }, 100);
+  
       setTimeout(() => {
         clearInterval(interval);
         setRollingDice(false);
-      }, 3000);
-    }, 2000);
-
-    const countdownInterval = setInterval(() => {
-      setTimer(prevTimer => {
-        if (prevTimer > 0) {
-          return prevTimer - 1;
-        } else {
-          clearInterval(countdownInterval);
-          setTimerActive(false); 
-          return prevTimer;
-        }
-      });
-    }, 1000);
+  
+        // Iniciar el temporizador después de que se complete la animación del dado
+        setTimerActive(true);
+        setTimer(20);
+  
+        const countdownInterval = setInterval(() => {
+          setTimer((prevTimer) => {
+            if (prevTimer > 0) {
+              return prevTimer - 1;
+            } else {
+              clearInterval(countdownInterval);
+              setTimerActive(false);
+              return prevTimer;
+            }
+          });
+        }, 1000);
+      }, 3000); // Esperar 3 segundos para detener la animación del dado
+    }, 2000); // Esperar 2 segundos antes de iniciar la animación del dado
   };
 
   

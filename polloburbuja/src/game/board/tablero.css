@@ -28,8 +28,8 @@
   
   .player {
     position: absolute;
-    width: 18.5vh;
-    height: 19vh;
+    width: 21vh;
+    height: 21vh;
     border: solid black;
     background-image:
     linear-gradient(to top, rgba(69,209,150,0.5), rgba(217,217,217,0.8));
@@ -45,8 +45,8 @@
   }
   
   .casilla {
-    width: 12vh;
-    height: 12vh;
+    width: 15vh;
+    height: 15vh;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -182,7 +182,7 @@
   .rolling {
     animation-name: rollDice;
     animation-duration: 5s;
-    animation-timing-function: steps(12); 
+    animation-timing-function: steps(6); 
     animation-fill-mode: forwards;
     animation-iteration-count: infinite;
     animation-direction: alternate; 
@@ -210,9 +210,10 @@
   
   .player-icon {
     position: absolute;
-    width: 3vh; 
-    height: 3vh; 
+    width: 4vh; 
+    height: 4vh; 
     animation: tambaleo 1s infinite;
+    padding: 1vh;
   
   }
   

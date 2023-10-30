@@ -1,10 +1,8 @@
 /* Aspectos generales */
 
 #root {
-  max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -83,6 +81,7 @@ nav ul li button {
   width: 40vh;
   height: 40vh;
   animation: rotar 7s linear infinite;
+  user-select: none;
 }
 
 @keyframes rotar {
