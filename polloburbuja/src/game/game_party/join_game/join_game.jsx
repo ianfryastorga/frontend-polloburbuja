@@ -12,6 +12,9 @@ function JoinGame() {
     <div>
         <a href='/tablero'><button id='test'><h1>Presionar aquí para ver tablero</h1></button></a>
     </div>
+    <div>
+        <a href='/flappy_bird'><button id='test_2'><h1>Presionar aquí para ver Flappy Bird</h1></button></a>
+    </div>
     </Layout>
   )
 }
