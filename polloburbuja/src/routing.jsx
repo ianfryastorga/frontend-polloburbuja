@@ -10,6 +10,7 @@ import CreateGame from "./game/game_party/create_game/create_game"
 import JoinGame from "./game/game_party/join_game/join_game"
 import Tablero from "./game/board/tablero"
 import FlappyBird from "./game/minigames/flappy_bird/flappy_bird.jsx"
+import ProReflex from "./game/minigames/pro_reflex/pro_reflex.jsx"
 
 function Routing(){
     return (
@@ -27,6 +28,7 @@ function Routing(){
                 <Route path="/join_game" element={<JoinGame/>} />
                 <Route path="/tablero" element={<Tablero/>} />
                 <Route path="/flappy_bird" element={<FlappyBird/>} />
+                <Route path ="/pro_reflex" element={<ProReflex/>} />
             </Routes>
         </BrowserRouter>
         </>

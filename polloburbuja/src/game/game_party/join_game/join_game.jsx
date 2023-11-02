@@ -15,6 +15,10 @@ function JoinGame() {
     <div>
         <a href='/flappy_bird'><button id='test_2'><h1>Presionar aquí para ver Flappy Bird</h1></button></a>
     </div>
+
+    <div>
+        <a href='/pro_reflex'><button id='test_3'><h1>Presionar aquí para ver Pro Reflex</h1></button></a>
+    </div>
     </Layout>
   )
 }
