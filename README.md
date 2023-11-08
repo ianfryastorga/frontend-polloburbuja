@@ -4,7 +4,7 @@ PolloBurbuja es un emocionante juego de 4 jugadores que combina diversión y est
 
 ## Desarrollo Actual
 
-Actualmente el desarrollo de PolloBurbuja se encuentra en fase inicial, centrándose en las siguientes áreas:
+Actualmente el desarrollo de PolloBurbuja se encuentra en fase de desarrollo, centrándose en las siguientes áreas:
 
 1. Vistas y Navegación: Hemos diseñado las interfaces de usuario y configurado la navegación dentro de la aplicación para que puedas moverte de manera intuitiva entre las diferentes secciones del juego.
 
