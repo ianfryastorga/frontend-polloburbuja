@@ -187,8 +187,13 @@
     animation-iteration-count: infinite;
     animation-direction: alternate; 
   }
-  
-  
+
+  .turno {
+    left: 2vh;
+    position: absolute;
+  }
+
+
   .timer {
     position: absolute;
     top: 2.5vh;

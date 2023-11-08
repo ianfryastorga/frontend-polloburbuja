@@ -7,6 +7,7 @@ const ProReflex = () => {
   const [objectPosition, setObjectPosition] = useState(getRandomPosition());
   const [velocity, setVelocity] = useState({ x: 40, y: 30 });
   const [gameOver, setGameOver] = useState(false);
+  const [audio, setAudio] = useState(new Audio());
 
   function getRandomPosition() {
     let x = Math.random() * (800 - 50);
@@ -15,7 +16,6 @@ const ProReflex = () => {
   }
 
   useEffect(() => {
-
     const interval = setInterval(() => {
       if (!gameOver) {
         let newPosition = {
@@ -38,8 +38,6 @@ const ProReflex = () => {
   }, [objectPosition, velocity, gameOver]);
 
   useEffect(() => {
-
-
     const handleKeyDown = (e) => {
       if (e.code === 'Space') {
         const objectCenterX = objectPosition.x + 25;
@@ -60,18 +58,24 @@ const ProReflex = () => {
 
           if (normalizedDistance <= 0.15) {
             setScore(1);
+            setAudio(new Audio('src\\game\\minigames\\pro_reflex\\1.mp3'));
           } else if (normalizedDistance <= 0.25) {
             setScore(0.75);
+            setAudio(new Audio('src\\game\\minigames\\pro_reflex\\0.75.mp3'));
           } else if (normalizedDistance <= 0.35) {
             setScore(0.5);
+            setAudio(new Audio('src\\game\\minigames\\pro_reflex\\0.5.mp3'));
           } else if (normalizedDistance <= 0.45) {
             setScore(0.25);
+            setAudio(new Audio('src\\game\\minigames\\pro_reflex\\0.25.mp3'));
+          } else {
+            setScore(0);
+            setAudio(new Audio('src\\game\\minigames\\pro_reflex\\0.mp3'));
           }
-        } else {
-          setScore(0);
-        }
 
-        setGameOver(true);
+          audio.play();
+          setGameOver(true);
+        }
       }
     };
 
@@ -95,7 +99,7 @@ const ProReflex = () => {
           className="object"
         />
         <p>Puntuación: {score.toFixed(2)}</p>
-        <audio src="src\game\minigames\pro_reflex\fondo_proreflex.mp3" autoPlay loop/>
+        <audio src="src\\game\\minigames\\pro_reflex\\fondo_proreflex.mp3" autoPlay loop/>
       </div>  
     </Layout>
   );

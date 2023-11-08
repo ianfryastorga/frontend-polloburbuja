@@ -78,6 +78,10 @@ function Tablero() {
   const casillas = [];
 
   const [jugador1Posicion, setJugador1Posicion] = useState(posiciones[0]);
+  const [jugador2Posicion, setJugador2Posicion] = useState(posiciones[0]);
+  const [jugador3Posicion, setJugador3Posicion] = useState(posiciones[0]);
+  const [jugador4Posicion, setJugador4Posicion] = useState(posiciones[0]);
+
 
 
   const jugadores = [
@@ -98,6 +102,18 @@ function Tablero() {
           {jugadores.map(jugador => (
             (i === jugador1Posicion.i && j === jugador1Posicion.j) &&
             <img src={jugadores[0].imagen} className={`player-icon ${jugadores[0].posicion}`} id={jugadores[0].id} alt={jugadores[0].id} />
+            ))}
+           {jugadores.map(jugador => (
+            (i === jugador2Posicion.i && j === jugador2Posicion.j) &&
+            <img src={jugadores[1].imagen} className={`player-icon ${jugadores[1].posicion}`} id={jugadores[1].id} alt={jugadores[1].id} />
+            ))}
+           {jugadores.map(jugador => (
+            (i === jugador3Posicion.i && j === jugador3Posicion.j) &&
+            <img src={jugadores[2].imagen} className={`player-icon ${jugadores[2].posicion}`} id={jugadores[2].id} alt={jugadores[2].id} />
+            ))}
+          {jugadores.map(jugador => (
+            (i === jugador4Posicion.i && j === jugador4Posicion.j) &&
+            <img src={jugadores[3].imagen} className={`player-icon ${jugadores[3].posicion}`} id={jugadores[3].id} alt={jugadores[3].id} />
             ))}
         </div>
       );
@@ -141,19 +157,16 @@ function Tablero() {
         clearInterval(interval);
         setRollingDice(false);
 
-      setUltimoResultadoDado(randomNum); // Guardar el último resultado del dado
+      setUltimoResultadoDado(randomNum); 
 
       setJugador1Posicion((prevPosicion) => {
-        // Calcular la nueva posición en función del resultado del dado
         let nuevaPosicion = prevPosicion.i * 7 + prevPosicion.j + randomNum + 1;
-        // Asegurarse de que la nueva posición esté dentro de los límites del tablero
         if (nuevaPosicion >= 29) {
           nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
         }
         return posiciones[nuevaPosicion];
       });
   
-        // Iniciar el temporizador después de que se complete la animación del dado
         setTimerActive(true);
         setTimer(20);
   
@@ -248,6 +261,11 @@ function Tablero() {
         <div className='interfaz'>
           {interfaz === 'normal' && (
         <>
+
+        <div className='turno'>
+          <h3>Turno de Jugador 1</h3>
+        </div>
+        
         <div className='overlay'>
           <img className='dado' src={dado} alt='dado' onClick={handleDadoClick} />
           <span className='overlay-text'>DADO</span>
