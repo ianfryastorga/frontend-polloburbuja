@@ -1,10 +1,9 @@
 .circle {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+    top: 25vh;
+    left: 35vh;
+    width: 20vh;
+    height: 20vh;
     background-color: red;
   }
   

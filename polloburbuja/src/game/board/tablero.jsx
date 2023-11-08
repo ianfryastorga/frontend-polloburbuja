@@ -42,13 +42,49 @@ function Tablero() {
     ['☆', '', '', '', '', '', '←'],
   ];
 
+
+  const posiciones = [
+    { i: 0, j: 0 },
+    { i: 0, j: 1 },
+    { i: 0, j: 2 },
+    { i: 0, j: 3 },
+    { i: 0, j: 4 },
+    { i: 0, j: 5 },
+    { i: 0, j: 6 },
+    { i: 1, j: 6 },
+    { i: 1, j: 5 },
+    { i: 1, j: 4 },
+    { i: 1, j: 3 },
+    { i: 1, j: 2 },
+    { i: 1, j: 1 },
+    { i: 1, j: 0 },
+    { i: 2, j: 0 },
+    { i: 2, j: 1 },
+    { i: 2, j: 2 },
+    { i: 2, j: 3 },
+    { i: 2, j: 4 },
+    { i: 2, j: 5 },
+    { i: 2, j: 6 },
+    { i: 3, j: 6 },
+    { i: 3, j: 5 },
+    { i: 3, j: 4 },
+    { i: 3, j: 3 },
+    { i: 3, j: 2 },
+    { i: 3, j: 1 },
+    { i: 3, j: 0 },
+
+  ];
+
   const casillas = [];
 
+  const [jugador1Posicion, setJugador1Posicion] = useState(posiciones[0]);
+
+
   const jugadores = [
-    { id: 'jugador-1', posicion: 'arriba-izquierda', imagen: amongus },
-    { id: 'jugador-2', posicion: 'arriba-derecha', imagen: babyyoda },
-    { id: 'jugador-3', posicion: 'abajo-izquierda', imagen: angrybirds },
-    { id: 'jugador-4', posicion: 'abajo-derecha', imagen: mickeymouse },
+    { id: 'jugador-1', posicion: 'arriba-izquierda', imagen: amongus},
+    { id: 'jugador-2', posicion: 'arriba-derecha', imagen: babyyoda},
+    { id: 'jugador-3', posicion: 'abajo-izquierda', imagen: angrybirds},
+    { id: 'jugador-4', posicion: 'abajo-derecha', imagen: mickeymouse},
   ];
 
   for (let i = 0; i < 4; i++) {
@@ -59,9 +95,10 @@ function Tablero() {
       casillas.push(
         <div className={`casilla ${color}`} id={`casilla-${i}-${j}`}>
           {direccion && <span className="flecha">{direccion}</span>}
-          {i === 0 && j === 0 && jugadores.map(jugador => (
-            <img src={jugador.imagen} className={`player-icon ${jugador.posicion}`} id={jugador.id} alt={jugador.id} />
-          ))}
+          {jugadores.map(jugador => (
+            (i === jugador1Posicion.i && j === jugador1Posicion.j) &&
+            <img src={jugadores[0].imagen} className={`player-icon ${jugadores[0].posicion}`} id={jugadores[0].id} alt={jugadores[0].id} />
+            ))}
         </div>
       );
     }
@@ -81,6 +118,8 @@ function Tablero() {
 
   const [timerActive, setTimerActive] = useState(false); 
 
+  const [ultimoResultadoDado, setUltimoResultadoDado] = useState(null);
+
 
   const handleTiendaClick = () => {
     setInterfaz('potenciadores');
@@ -88,16 +127,31 @@ function Tablero() {
 
   const handleDadoClick = () => {
     setRollingDice(true);
+
+    let randomNum;
   
     let animationTimeout = setTimeout(() => {
       let interval = setInterval(() => {
-        var randomNum = Math.floor(Math.random() * 6);
+        randomNum = Math.floor(Math.random() * 6);
         setImage(diceImages[randomNum]);
+        console.log(randomNum);
       }, 100);
   
       setTimeout(() => {
         clearInterval(interval);
         setRollingDice(false);
+
+      setUltimoResultadoDado(randomNum); // Guardar el último resultado del dado
+
+      setJugador1Posicion((prevPosicion) => {
+        // Calcular la nueva posición en función del resultado del dado
+        let nuevaPosicion = prevPosicion.i * 7 + prevPosicion.j + randomNum + 1;
+        // Asegurarse de que la nueva posición esté dentro de los límites del tablero
+        if (nuevaPosicion >= 29) {
+          nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
+        }
+        return posiciones[nuevaPosicion];
+      });
   
         // Iniciar el temporizador después de que se complete la animación del dado
         setTimerActive(true);
@@ -188,7 +242,7 @@ function Tablero() {
           </div>
 
           {casillas}
-
+          
         </div>
 
         <div className='interfaz'>
