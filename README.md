@@ -10,6 +10,14 @@ Actualmente el desarrollo de PolloBurbuja se encuentra en fase inicial, centrán
 
 2. Primer Vistazo al Sistema de Juego: Hemos implementado una funcionalidad básica del juego que te permitirá obtener una idea de cómo funcionará. Para acceder a esta funcionalidad, debes ir a PLAY -> JOIN GAME -> PRESIONAR AQUÍ PARA VER EL TABLERO.
 
+2.1. Aquí podrás interactuar con la tienda y podrás simular una jugada como el jugador 1, presiona para tirar el dado y avanzarás.
+
+3. Minijuegos desarrollados
+3.1 Flappy Bird, para acceder a él debes ir a PLAY -> JOIN GAME -> PRESIONAR AQUÍ PARA FLAPPY BIRD.
+3.2 Pro Reflex, para acceder a él debes ir a PLAY -> JOIN GAME -> PRESIONAR AQUÍ PARA PRO REFLEX.
+
+Ambos minijuegos son funcionales y dan una idea de como funcionarán en la entrega final.
+
 ## Instrucciones para ejecutar la Aplicación
 
 1. Asegúrate de tener Node.js y npm instalados en tu computadora.
@@ -19,7 +27,7 @@ Actualmente el desarrollo de PolloBurbuja se encuentra en fase inicial, centrán
 3. Ejecuta el siguiente comando para instalar la dependencia necesaria:
 
 ```bash
-npm install react-responsive-carousel --save
+yarn add react-responsive-carousel
 ```
 
 4. Una vez que la instalación se haya completado, asegúrate de estar en la carpeta "polloburbuja" dentro del proyecto.
