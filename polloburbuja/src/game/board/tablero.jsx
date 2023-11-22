@@ -1,5 +1,6 @@
 import Layout from '../../layout.jsx'
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import amongus from '../../assets/img/among_us.png'
 import babyyoda from '../../assets/img/baby_yoda.png'
 import angrybirds from '../../assets/img/angry_birds.png'
@@ -20,6 +21,7 @@ import Dice3 from '../../assets/img/Dice3.png'
 import Dice4 from '../../assets/img/Dice4.png'
 import Dice5 from '../../assets/img/Dice5.png'
 import Dice6 from '../../assets/img/Dice6.png'
+import axios from 'axios'
 import './tablero.css'
 
 
@@ -27,6 +29,29 @@ import './tablero.css'
 
 
 function Tablero() {
+
+  const [datosDelTablero, setDatosDelTablero] = useState(null);
+
+  useEffect(() => {
+    const obtenerDatosDelTablero = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/boards/boardData');
+        console.log('Respuesta completa de Axios:', response);
+  
+        // Continúa con la lógica de manejo de datos
+        if (Array.isArray(response.data)) {
+          setDatosDelTablero(response.data);
+        } else {
+          console.error('Los datos del tablero no son un array:', response.data);
+        }
+      } catch (error) {
+        console.error('Error al obtener datos del tablero:', error);
+      }
+    };
+  
+    obtenerDatosDelTablero();
+  }, []);
+  
 
   const colores = [
     ['amarillo', 'azul', 'azul', 'rojo', 'azul', 'verde', 'rojo'],
@@ -136,6 +161,14 @@ function Tablero() {
 
   const [ultimoResultadoDado, setUltimoResultadoDado] = useState(null);
 
+  const [jugadorActual, setJugadorActual] = useState(1);
+
+  const [dadoLanzado, setDadoLanzado] = useState(false);
+
+  const siguienteJugador = () => {
+    setJugadorActual(jugadorActual % 4 + 1);
+    setDadoLanzado(false);
+  };
 
   const handleTiendaClick = () => {
     setInterfaz('potenciadores');
@@ -143,47 +176,82 @@ function Tablero() {
 
   const handleDadoClick = () => {
     setRollingDice(true);
+    if (!dadoLanzado) {
+      setDadoLanzado(true);
 
-    let randomNum;
-  
-    let animationTimeout = setTimeout(() => {
-      let interval = setInterval(() => {
-        randomNum = Math.floor(Math.random() * 6);
-        setImage(diceImages[randomNum]);
-        console.log(randomNum);
-      }, 100);
-  
-      setTimeout(() => {
-        clearInterval(interval);
-        setRollingDice(false);
+      let randomNum;
+    
+      let animationTimeout = setTimeout(() => {
+        let interval = setInterval(() => {
+          randomNum = Math.floor(Math.random() * 6);
+          setImage(diceImages[randomNum]);
+          console.log(randomNum);
+        }, 100);
+    
+        setTimeout(() => {
+          clearInterval(interval);
+          setRollingDice(false);
 
-      setUltimoResultadoDado(randomNum); 
+        setUltimoResultadoDado(randomNum); 
 
-      setJugador1Posicion((prevPosicion) => {
-        let nuevaPosicion = prevPosicion.i * 7 + prevPosicion.j + randomNum + 1;
-        if (nuevaPosicion >= 29) {
-          nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
-        }
-        return posiciones[nuevaPosicion];
-      });
-  
-        setTimerActive(true);
-        setTimer(20);
-  
-        const countdownInterval = setInterval(() => {
-          setTimer((prevTimer) => {
-            if (prevTimer > 0) {
-              return prevTimer - 1;
-            } else {
-              clearInterval(countdownInterval);
-              setTimerActive(false);
-              return prevTimer;
+        if (jugadorActual === 1) {
+
+          setJugador1Posicion((prevPosicion) => {
+            let nuevaPosicion = prevPosicion.i * 7 + prevPosicion.j + randomNum + 1;
+            if (nuevaPosicion >= 29) {
+              nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
             }
+            return posiciones[nuevaPosicion];
           });
-        }, 1000);
-      }, 3000); // Esperar 3 segundos para detener la animación del dado
-    }, 2000); // Esperar 2 segundos antes de iniciar la animación del dado
-  };
+          
+        } else if (jugadorActual === 2) {
+
+          setJugador2Posicion((prevPosicion) => {
+            let nuevaPosicion = prevPosicion.i * 7 + prevPosicion.j + randomNum + 1;
+            if (nuevaPosicion >= 29) {
+              nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
+            }
+            return posiciones[nuevaPosicion];
+          });
+
+        } else if (jugadorActual === 3) {
+
+          setJugador3Posicion((prevPosicion) => {
+            let nuevaPosicion = prevPosicion.i * 7 + prevPosicion.j + randomNum + 1;
+            if (nuevaPosicion >= 29) {
+              nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
+            }
+            return posiciones[nuevaPosicion];
+          });
+        } else if (jugadorActual === 4) {
+
+          setJugador4Posicion((prevPosicion) => {
+            let nuevaPosicion = prevPosicion.i * 7 + prevPosicion.j + randomNum + 1;
+            if (nuevaPosicion >= 29) {
+              nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
+            }
+            return posiciones[nuevaPosicion];
+          });
+        }
+          setTimerActive(true);
+          setTimer(20);
+    
+          const countdownInterval = setInterval(() => {
+            setTimer((prevTimer) => {
+              if (prevTimer > 0) {
+                return prevTimer - 1;
+              } else {
+                clearInterval(countdownInterval);
+                setTimerActive(false);
+                siguienteJugador();
+                return prevTimer;
+              }
+            });
+          }, 1000);
+        }, 3000); 
+      }, 2000); 
+    };
+  }; 
 
   
   const handleSalirClick = () => {
@@ -193,131 +261,75 @@ function Tablero() {
 
   return (
     <Layout>
-      <div className='contenedor'>
-        <div className='tablero'>
-          <div className='player' id='jugador1'>
-            <h3>Jugador 1</h3>
-            <img className="picture" src={amongus} alt="icon"/>
-                <div className='puntos'>
-                    <div>
-                    <img className='icons' src={moneda} alt='icon'/>
-                    <p>50</p>
-                    <img className='icons' src={star} alt='icon'/>
-                    <p>1</p>
-                    </div>
-                </div>
+    <div className='contenedor'>
+      <div className='tablero'>
+        {/* Renderiza jugadores y casillas */}
+        {datosDelTablero && (
+        datosDelTablero.map((jugador, index) => (
+          <div className='player' id={`jugador${index + 1}`}>
+            <h3>{`Jugador ${index + 1}`}</h3>
+            <img className='picture' src={jugadores[index].imagen} alt='icon' />
+            <div className='puntos'>
+              <div>
+                <img className='icons' src={moneda} alt='icon' />
+                <p>{jugador.monedas}</p>
+                <img className='icons' src={star} alt='icon' />
+                <p>{jugador.estrellas}</p>
+              </div>
+            </div>
           </div>
-          <div className='player' id='jugador2'>
-            <h3>Jugador 2</h3>
-            
-            <img className="picture" src={babyyoda} alt="icon"/>
-            
-                <div className='puntos'>
-                    <div>
-                    <img className='icons' src={moneda} alt='icon'/>
-                    <p>43</p>
-                    <img className='icons' src={star} alt='icon'/>
-                    <p>2</p>
-                    </div>
-                </div>
-
-          <div>
-          {dadoVisible && (
-          <img className={`dado-jugable ${rollingDice ? 'rolling' : ''}`}
-          src={image} alt='dado' />
-          )}
-          </div>
-
-          </div>
-          <div className='player' id='jugador3'>
-            <h3>Jugador 3</h3>
-            <img className="picture" src={angrybirds} alt="icon"/>
-                <div className='puntos'>
-                    <div>
-                    <img className='icons' src={moneda} alt='icon'/>
-                    <p>5</p>
-                    <img className='icons' src={star} alt='icon'/>
-                    <p>0</p>
-                    </div>
-                </div>
-          </div>
-          <div className='player' id='jugador4'>
-            <h3>Jugador 4</h3>
-            <img className="picture" src={mickeymouse} alt="icon"/>
-                <div className='puntos'>
-                    <div>
-                    <img className='icons' src={moneda} alt='icon'/>
-                    <p>25</p>
-                    <img className='icons' src={star} alt='icon'/>
-                    <p>4</p>
-                    </div>
-                </div>
-          </div>
-
-          {casillas}
-          
-        </div>
-
-        <div className='interfaz'>
-          {interfaz === 'normal' && (
-        <>
-
-        <div className='turno'>
-          <h3>Turno de Jugador 1</h3>
-        </div>
-        
-        <div className='overlay'>
-          <img className='dado' src={dado} alt='dado' onClick={handleDadoClick} />
-          <span className='overlay-text'>DADO</span>
-        </div>
-
-        <div className='overlay'>
-          <img className='tienda' src={tienda} alt='tienda' onClick={handleTiendaClick}/>
-          <span className='overlay-text'>TIENDA</span>
-        </div>
-
-        <div className={`timer ${timer <= 10 ? 'warning' : ''}`}>
-          {timer}
-        </div>
-
-        </>
+        ))
       )}
-      {interfaz === 'potenciadores' && (
-        <>
-        <div className='overlay'>
-          <img className='fuego' src={fuego} alt='fuego'/>
-          <span className='overlay-text'>5 MONEDAS</span>
-        </div>
 
-        <div className='overlay'>
-          <img className='gandalf' src={gandalf} alt='gandalf'/>
-          <span className='overlay-text'>5 MONEDAS</span>
-        </div>
-        
-        <div className='overlay'>
-          <img className='fantasma' src={fantasma} alt='fantasma'/>
-          <span className='overlay-text'>7 MONEDAS</span>
-        </div>
-        
-        <div className='overlay'>
-          <img className='toreto' src={toreto} alt='toreto'/>
-          <span className='overlay-text'>8 MONEDAS</span>
-        </div>
-        
-        <div className='overlay'>
-          <img className='patricio' src={patricio} alt='fuego'/>
-          <span className='overlay-text'>10 MONEDAS</span>
-        </div>
-        
-        <div className='overlay'>
-          <img className='salir' src={salir} alt='salir' onClick={handleSalirClick}/>
-          <span className='overlay-text'>SALIR</span>
-        </div>
-        </>
-      )}
+        {/* Renderiza casillas */}
+        {casillas}
+      </div>
+
+      <div className='interfaz'>
+        {/* Renderiza la interfaz normal */}
+        {interfaz === 'normal' && (
+          <>
+            <div className='turno'>
+              <h3>Turno de Jugador {jugadorActual}</h3>
+            </div>
+
+            <div className='overlay'>
+              <img className='dado' src={dado} alt='dado' onClick={handleDadoClick} />
+              <span className='overlay-text'>DADO</span>
+            </div>
+
+            <div className='overlay'>
+              <img className='tienda' src={tienda} alt='tienda' onClick={handleTiendaClick} />
+              <span className='overlay-text'>TIENDA</span>
+            </div>
+
+            <div className={`timer ${timer <= 10 ? 'warning' : ''}`}>
+              {timer}
+            </div>
+          </>
+        )}
+
+        {/* Renderiza la interfaz de potenciadores */}
+        {interfaz === 'potenciadores' && (
+          <>
+            {/* Renderiza potenciadores */}
+            {potenciadores.map((potenciador, index) => (
+              <div className='overlay' key={`potenciador-${index}`}>
+                <img className={potenciador.clase} src={potenciador.imagen} alt={potenciador.alt} />
+                <span className='overlay-text'>{`${potenciador.moneda} MONEDAS`}</span>
+              </div>
+            ))}
+
+            {/* Renderiza botón para salir */}
+            <div className='overlay'>
+              <img className='salir' src={salir} alt='salir' onClick={handleSalirClick} />
+              <span className='overlay-text'>SALIR</span>
+            </div>
+          </>
+        )}
+      </div>
     </div>
-    </div>
-    </Layout>
+  </Layout>
   );
 }
 
