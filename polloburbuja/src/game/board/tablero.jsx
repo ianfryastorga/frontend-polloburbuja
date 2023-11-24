@@ -35,7 +35,7 @@ function Tablero() {
   useEffect(() => {
     const obtenerDatosDelTablero = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/boards/boardData');
+        const response = await axios.get('http://localhost:3000/players/');
         console.log('Respuesta completa de Axios:', response);
   
         // Continúa con la lógica de manejo de datos
