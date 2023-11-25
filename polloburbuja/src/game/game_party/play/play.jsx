@@ -18,7 +18,7 @@ function Play() {
         code: createcode
       }).then((response) => {
         console.log('Juego Creado, Ahora tienes que esperar que otros se unan');
-        window.location.href = `/create_game?id_game=${response.data.id_game}&code=${response.data.code}`;
+        window.location.href = `/join_game?id_game=${response.data.id_game}&code=${response.data.code}`;
         // setError(false);
         // setMsg('Juego Creado, Ahora tienes que esperar que otros se unan');
       }).catch((error) => {      
@@ -33,7 +33,7 @@ function Play() {
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/games/joingame`, {
         code: joincode
       }).then((response) => {
-        window.location.href = `/create_game?id_game=${response.data.id}&code=${response.data.code}`;
+        window.location.href = `/join_game?id_game=${response.data.id}&code=${response.data.code}`;
         // setError(false);
         // setMsg('Juego Creado, Ahora tienes que esperar que otros se unan');
       }).catch((error) => {      

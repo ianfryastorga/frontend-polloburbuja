@@ -11,7 +11,6 @@ function JoinGame() {
   const code = new URLSearchParams(location.search).get('code');
 
   const [username, setUsername] = useState("");
-  const [createcode, setCreateCode] = useState("");
 
 
   const CreatePlayerSubmit = async (event) => {
@@ -31,11 +30,29 @@ function JoinGame() {
 
   return (
     <Layout>
-      <div className='join-container'>
+      {/* <div lassName='join-container'>
         <h3>Ingresa el código de la sala:</h3>
         <input type='text' placeholder='Código de la sala' className='input-codigo'></input>
         <button type='submit' className='boton-enviar'>Enviar Código</button>
+    </div> */}
+
+    <div lassName='join-container'>
+        <form onSubmit={CreatePlayerSubmit}>
+          <label>
+            Username:
+            <input 
+              type="text" 
+              name="username"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              required
+            />
+          </label>
+          <input type="submit" value="CREAR PLAYER" className='gradient-button'/>
+        </form>
+
     </div>
+
     <div>
         <a href='/tablero'><button id='test'><h1>Presionar aquí para ver tablero</h1></button></a>
     </div>
