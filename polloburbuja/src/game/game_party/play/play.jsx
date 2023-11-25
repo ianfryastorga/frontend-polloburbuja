@@ -5,19 +5,35 @@ import React, { useState } from 'react';
 
 function Play() {
   const [username, setUsername] = useState("");
-  const [code, setCode] = useState(""); 
+  const [createcode, setCreateCode] = useState("");
+  const [joincode, setJoinCode] = useState(""); 
   // const [error, setError] = useState(false);
   // const [msg, setMsg] = useState("");
 
-  const handleSubmit = async (event) => {
+  const CreateGameSubmit = async (event) => {
     event.preventDefault();
 
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/games/newgame`, {
         username: username,
-        code: code
+        code: createcode
       }).then((response) => {
         console.log('Juego Creado, Ahora tienes que esperar que otros se unan');
-        window.location.href = '/create_game';
+        window.location.href = `/create_game?id_game=${response.data.id_game}&code=${response.data.code}`;
+        // setError(false);
+        // setMsg('Juego Creado, Ahora tienes que esperar que otros se unan');
+      }).catch((error) => {      
+      console.error('Ocurrió un error:', error);
+      // setError(true); // aquí puede haber más lógica para tratar los errores
+      });
+    }
+
+  const JoinGameSubmit = async (event) => {
+    event.preventDefault();
+
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/games/joingame`, {
+        code: joincode
+      }).then((response) => {
+        window.location.href = `/create_game?id_game=${response.data.id}&code=${response.data.code}`;
         // setError(false);
         // setMsg('Juego Creado, Ahora tienes que esperar que otros se unan');
       }).catch((error) => {      
@@ -29,7 +45,7 @@ function Play() {
   return (
     <Layout>
       <div className="button-container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={CreateGameSubmit}>
           <label>
             Username:
             <input 
@@ -41,16 +57,29 @@ function Play() {
             />
           </label>
           <label>
-            Code:
+            Create Code:
             <input 
               type="text" 
-              name="code"
-              value={code}
-              onChange={e => setCode(e.target.value)}
+              name="createcode"
+              value={createcode}
+              onChange={e => setCreateCode(e.target.value)}
               required
             />
           </label>
           <input type="submit" value="CREAR PARTIDA" className='gradient-button'/>
+        </form>
+        <form onSubmit={JoinGameSubmit}>
+          <label>
+            Code to Join:
+            <input 
+              type="text" 
+              name="joincode"
+              value={joincode}
+              onChange={e => setJoinCode(e.target.value)}
+              required
+            />
+          </label>
+          <input type="submit" value="UNIRSE A LA PARTIDA" className='gradient-button'/>
         </form>
       </div>
     </Layout>
