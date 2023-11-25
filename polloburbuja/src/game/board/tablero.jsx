@@ -36,13 +36,9 @@ function Tablero() {
     const obtenerDatosDelTablero = async () => {
       try {
         const response = await axios.get('http://localhost:3000/boards/boardData');
-        console.log('Respuesta completa de Axios:', response);
   
-        // Continúa con la lógica de manejo de datos
         if (Array.isArray(response.data)) {
           setDatosDelTablero(response.data);
-        } else {
-          console.error('Los datos del tablero no son un array:', response.data);
         }
       } catch (error) {
         console.error('Error al obtener datos del tablero:', error);
@@ -174,11 +170,11 @@ function Tablero() {
     setInterfaz('potenciadores');
   };
 
-  const handleDadoClick = () => {
+  const handleDadoClick = async () => {
     setRollingDice(true);
     if (!dadoLanzado) {
       setDadoLanzado(true);
-
+       
       let randomNum;
     
       let animationTimeout = setTimeout(() => {
@@ -188,11 +184,26 @@ function Tablero() {
           console.log(randomNum);
         }, 100);
     
-        setTimeout(() => {
+        setTimeout(async () => {
           clearInterval(interval);
           setRollingDice(false);
 
         setUltimoResultadoDado(randomNum); 
+
+        try {
+          // Realizar la solicitud POST al backend con el resultado del dado
+          const response = await axios.post('http://localhost:3000/boards/realizarJugada', {
+            dado: randomNum,
+          });
+
+          console.log('Response Status:', response.status);
+          console.log('Response Data:', response.data);
+        
+        } catch (error) {
+          console.error('Error Status:', error.response.status);
+          console.error('Error Data:', error.response.data);
+        }
+
 
         if (jugadorActual === 1) {
 
@@ -263,6 +274,8 @@ function Tablero() {
     <Layout>
     <div className='contenedor'>
       <div className='tablero'>
+
+        
         {/* Renderiza jugadores y casillas */}
         {datosDelTablero && (
         datosDelTablero.map((jugador, index) => (
@@ -280,10 +293,18 @@ function Tablero() {
           </div>
         ))
       )}
+      
+
+      
 
         {/* Renderiza casillas */}
         {casillas}
       </div>
+
+
+
+
+      
 
       <div className='interfaz'>
         {/* Renderiza la interfaz normal */}
@@ -307,18 +328,42 @@ function Tablero() {
               {timer}
             </div>
           </>
-        )}
+        )}        
 
+
+      
         {/* Renderiza la interfaz de potenciadores */}
-        {interfaz === 'potenciadores' && (
-          <>
             {/* Renderiza potenciadores */}
-            {potenciadores.map((potenciador, index) => (
-              <div className='overlay' key={`potenciador-${index}`}>
-                <img className={potenciador.clase} src={potenciador.imagen} alt={potenciador.alt} />
-                <span className='overlay-text'>{`${potenciador.moneda} MONEDAS`}</span>
-              </div>
-            ))}
+            {interfaz === 'potenciadores' && (
+        <>
+        <div className='overlay'>
+          <img className='fuego' src={fuego} alt='fuego'/>
+          <span className='overlay-text'>5 MONEDAS</span>
+        </div>
+
+        <div className='overlay'>
+          <img className='gandalf' src={gandalf} alt='gandalf'/>
+          <span className='overlay-text'>5 MONEDAS</span>
+        </div>
+        
+        <div className='overlay'>
+          <img className='fantasma' src={fantasma} alt='fantasma'/>
+          <span className='overlay-text'>7 MONEDAS</span>
+        </div>
+        
+        <div className='overlay'>
+          <img className='toreto' src={toreto} alt='toreto'/>
+          <span className='overlay-text'>8 MONEDAS</span>
+        </div>
+        
+        <div className='overlay'>
+          <img className='patricio' src={patricio} alt='fuego'/>
+          <span className='overlay-text'>10 MONEDAS</span>
+        </div>
+        
+      
+
+    
 
             {/* Renderiza botón para salir */}
             <div className='overlay'>
@@ -329,6 +374,8 @@ function Tablero() {
         )}
       </div>
     </div>
+
+    
   </Layout>
   );
 }
