@@ -190,21 +190,6 @@ function Tablero() {
 
         setUltimoResultadoDado(randomNum); 
 
-        try {
-          // Realizar la solicitud POST al backend con el resultado del dado
-          const response = await axios.post('http://localhost:3000/boards/realizarJugada', {
-            dado: randomNum,
-          });
-
-          console.log('Response Status:', response.status);
-          console.log('Response Data:', response.data);
-        
-        } catch (error) {
-          console.error('Error Status:', error.response.status);
-          console.error('Error Data:', error.response.data);
-        }
-
-
         if (jugadorActual === 1) {
 
           setJugador1Posicion((prevPosicion) => {
@@ -212,6 +197,9 @@ function Tablero() {
             if (nuevaPosicion >= 29) {
               nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
             }
+
+          console.log(nuevaPosicion);
+          
             return posiciones[nuevaPosicion];
           });
           
@@ -222,6 +210,8 @@ function Tablero() {
             if (nuevaPosicion >= 29) {
               nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
             }
+
+          console.log(nuevaPosicion);
             return posiciones[nuevaPosicion];
           });
 
@@ -232,6 +222,8 @@ function Tablero() {
             if (nuevaPosicion >= 29) {
               nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
             }
+          
+            console.log(nuevaPosicion);
             return posiciones[nuevaPosicion];
           });
         } else if (jugadorActual === 4) {
@@ -241,6 +233,9 @@ function Tablero() {
             if (nuevaPosicion >= 29) {
               nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
             }
+
+           console.log(nuevaPosicion);
+          
             return posiciones[nuevaPosicion];
           });
         }
@@ -265,6 +260,31 @@ function Tablero() {
   }; 
 
   
+
+  const handlePlayerMove = async (jugadorActual, prevPosicion) => {
+    let nuevaPosicion = prevPosicion.i * 7 + prevPosicion.j + randomNum + 1;
+    if (nuevaPosicion >= 29) {
+      nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
+    }
+    console.log(nuevaPosicion);
+  
+    try {
+      // Realizar la solicitud POST al backend con el jugador actual y la nueva posición
+      const response = await axios.post('http://localhost:3000/boards/realizarJugada', {
+        jugadorActual: jugadorActual,
+        nuevaPosicion: nuevaPosicion,
+      });
+  
+      console.log('Response Status:', response.status);
+      console.log('Response Data:', response.data);
+    
+    } catch (error) {
+      console.error('Error Status:', error.response.status);
+      console.error('Error Data:', error.response.data);
+    }
+  
+    return posiciones[nuevaPosicion];
+  };
   const handleSalirClick = () => {
     setInterfaz('normal');
   };
@@ -381,4 +401,3 @@ function Tablero() {
 }
 
 export default Tablero;
-
