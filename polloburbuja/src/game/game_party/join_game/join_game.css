@@ -11,6 +11,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    bottom: 10%;
   }
   
   .input-codigo {
@@ -53,6 +54,27 @@
     font-size: 1vh;
   }
   
+
+  .character-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .character-icon {
+    width: 100px; 
+    height: 100px; 
+    margin: 10px;
+    cursor: pointer;
+    transition: border 0.3s ease;
+  }
+  
+  .character-icon.selected {
+    border: 2px solid red;
+  }
+  
+
 
   @media (max-width: 600px) {
     .join-container{
