@@ -7,8 +7,8 @@ function Play() {
   const [username, setUsername] = useState("");
   const [createcode, setCreateCode] = useState("");
   const [joincode, setJoinCode] = useState(""); 
-  // const [error, setError] = useState(false);
-  // const [msg, setMsg] = useState("");
+  const [error, setError] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const CreateGameSubmit = async (event) => {
     event.preventDefault();
@@ -19,11 +19,11 @@ function Play() {
       }).then((response) => {
         console.log('Juego Creado, Ahora tienes que esperar que otros se unan');
         window.location.href = `/join_game?id_game=${response.data.id_game}&code=${response.data.code}`;
-        // setError(false);
-        // setMsg('Juego Creado, Ahora tienes que esperar que otros se unan');
+        setError(false);
+        setMsg('Juego Creado, Ahora tienes que esperar que otros se unan');
       }).catch((error) => {      
       console.error('Ocurrió un error:', error);
-      // setError(true); // aquí puede haber más lógica para tratar los errores
+      setError(true);
       });
     }
 
@@ -34,16 +34,18 @@ function Play() {
         code: joincode
       }).then((response) => {
         window.location.href = `/join_game?id_game=${response.data.id}&code=${response.data.code}`;
-        // setError(false);
-        // setMsg('Juego Creado, Ahora tienes que esperar que otros se unan');
+        setError(false);
+        setMsg('Te has unido a la partida, Ahora tienes que esperar que otros se unan');
       }).catch((error) => {      
       console.error('Ocurrió un error:', error);
-      // setError(true); // aquí puede haber más lógica para tratar los errores
+      setError(true);
       });
     }
 
   return (
     <Layout>
+      {msg.length > 0 && <div className="successMsg"> {msg} </div>}
+      
       <div className="button-container">
         <form onSubmit={CreateGameSubmit}>
           <label>
