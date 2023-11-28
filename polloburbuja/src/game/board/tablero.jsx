@@ -1,4 +1,5 @@
 import Layout from '../../layout.jsx'
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import amongus from '../../assets/img/among_us.png'
@@ -30,16 +31,31 @@ import './tablero.css'
 
 function Tablero() {
 
+  const navigate = useNavigate();
+
+
   const [datosDelTablero, setDatosDelTablero] = useState(null);
 
+  const iniciarTemporizador = () => {
+    setTimerActive(true);
+    setTimer(20);
+  };
+
   useEffect(() => {
+    iniciarTemporizador();
     const obtenerDatosDelTablero = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/boards/boardData');
-  
-        if (Array.isArray(response.data)) {
-          setDatosDelTablero(response.data);
-        }
+        const response = await axios.get('http://localhost:3000/players/getplayers');
+        console.log('Respuesta completa de Axios:', response);
+
+         if (Array.isArray(response.data)) {
+        //   const datosTransformados = response.data.map((jugador) => ({
+        //     num_player: jugador.num_player,
+        //     position: jugador.position,
+        //   }));
+           setDatosDelTablero(response.data); }
+        // } else {
+        //   console.error('Los datos del tablero no son un array:', response.data);
       } catch (error) {
         console.error('Error al obtener datos del tablero:', error);
       }
@@ -161,8 +177,13 @@ function Tablero() {
 
   const [dadoLanzado, setDadoLanzado] = useState(false);
 
+  const [minijuegoActual, setMinijuegoActual] = useState(null);
+
+
   const siguienteJugador = () => {
     setJugadorActual(jugadorActual % 4 + 1);
+    setTimerActive(true);
+    setTimer(20);
     setDadoLanzado(false);
   };
 
@@ -181,12 +202,13 @@ function Tablero() {
         let interval = setInterval(() => {
           randomNum = Math.floor(Math.random() * 6);
           setImage(diceImages[randomNum]);
-          console.log(randomNum);
         }, 100);
     
         setTimeout(async () => {
           clearInterval(interval);
           setRollingDice(false);
+
+     
 
         setUltimoResultadoDado(randomNum); 
 
@@ -197,9 +219,11 @@ function Tablero() {
             if (nuevaPosicion >= 29) {
               nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
             }
-
-          console.log(nuevaPosicion);
-          
+            console.log([prevPosicion.i, prevPosicion.j]);
+            if (colores[prevPosicion.i, prevPosicion.j] === 'verde') {
+              const minijuegoSeleccionado = Math.random() < 0.5 ? 'flappy_bird' : 'pro_reflex';
+              navigate(`${minijuegoSeleccionado}`);
+            }
             return posiciones[nuevaPosicion];
           });
           
@@ -210,9 +234,14 @@ function Tablero() {
             if (nuevaPosicion >= 29) {
               nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
             }
+            console.log([prevPosicion.i, prevPosicion.j]);
 
-          console.log(nuevaPosicion);
+            if (colores[prevPosicion.i, prevPosicion.j] === 'verde') {
+              const minijuegoSeleccionado = Math.random() < 0.5 ? 'flappy_bird' : 'pro_reflex';
+              navigate(`${minijuegoSeleccionado}`);
+            }
             return posiciones[nuevaPosicion];
+
           });
 
         } else if (jugadorActual === 3) {
@@ -222,8 +251,13 @@ function Tablero() {
             if (nuevaPosicion >= 29) {
               nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
             }
-          
-            console.log(nuevaPosicion);
+            console.log([prevPosicion.i, prevPosicion.j]);
+
+
+            if (colores[prevPosicion.i, prevPosicion.j] === 'verde') {
+              const minijuegoSeleccionado = Math.random() < 0.5 ? 'flappy_bird' : 'pro_reflex';
+              navigate(`${minijuegoSeleccionado}`);
+            }
             return posiciones[nuevaPosicion];
           });
         } else if (jugadorActual === 4) {
@@ -233,29 +267,53 @@ function Tablero() {
             if (nuevaPosicion >= 29) {
               nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
             }
+            console.log([prevPosicion.i, prevPosicion.j]);
 
-           console.log(nuevaPosicion);
-          
+            
+            if (colores[prevPosicion.i, prevPosicion.j] === 'verde') {
+              const minijuegoSeleccionado = Math.random() < 0.5 ? 'flappy_bird' : 'pro_reflex';
+              navigate(`${minijuegoSeleccionado}`);
+            }
             return posiciones[nuevaPosicion];
           });
         }
-          setTimerActive(true);
-          setTimer(20);
-    
-          const countdownInterval = setInterval(() => {
-            setTimer((prevTimer) => {
-              if (prevTimer > 0) {
-                return prevTimer - 1;
-              } else {
-                clearInterval(countdownInterval);
-                setTimerActive(false);
-                siguienteJugador();
-                return prevTimer;
-              }
+        const enviarDatos = async () => {
+          try {
+            console.log('Datos enviados desde el frontend:', {
+              jugador: jugadorActual,
+              nuevaPosicion: randomNum,
             });
-          }, 1000);
-        }, 3000); 
-      }, 2000); 
+        
+            const response = await axios.post('http://localhost:3000/boards/realizarJugada', {
+              jugador: jugadorActual,
+              nuevaPosicion: randomNum,
+            });
+        
+            console.log('Respuesta completa de Axios:', response);
+        
+          } catch (error) {
+            console.error('Error al obtener datos del tablero:', error);
+          }
+        };
+        
+        enviarDatos();
+
+  
+
+    const countdownInterval = setInterval(() => {
+      setTimer((prevTimer) => {
+        if (prevTimer > 0) {
+          return prevTimer - 1;
+        } else {
+          clearInterval(countdownInterval);
+          setTimerActive(false);
+          siguienteJugador();
+          return prevTimer;
+        }
+      });
+    }, 1000);
+  }, 3000); 
+  }, 2000); 
     };
   }; 
 

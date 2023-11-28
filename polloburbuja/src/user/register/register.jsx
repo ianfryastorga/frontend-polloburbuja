@@ -1,6 +1,8 @@
 import Layout from '../../layout.jsx'
 import './register.css'
 import React, { useState } from 'react';
+import axios from 'axios';
+
 
 function Register() {
   
@@ -23,24 +25,21 @@ function Register() {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Evita que el formulario se envíe automáticamente
+    event.preventDefault();
     try {
-      const response = await fetch('/api/register', {
-        method: 'POST',
+      const response = await axios.post('http://localhost:3000/api/register', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Respuesta del servidor:', data);
-
-        // Puedes manejar la respuesta del servidor aquí, como mostrar un mensaje de éxito o redirigir al usuario a otra página.
+      if (response.status === 200) {
+        console.log('Respuesta del servidor:', response.data);
+        // Handle success here
       } else {
         console.error('Error al registrar el usuario:', response.status);
-        // Puedes manejar los errores aquí.
+        // Handle errors here
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
