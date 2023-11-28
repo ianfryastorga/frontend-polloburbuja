@@ -192,6 +192,11 @@
     left: 2vh;
     position: absolute;
   }
+  
+  .dado-jugable {
+    bottom: 50vh;
+    left: 60vh;
+  }
 
 
   .timer {

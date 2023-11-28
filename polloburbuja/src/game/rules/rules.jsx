@@ -17,7 +17,7 @@ function Rules() {
           <h1>Turnos y Movimientos</h1>
           <p>• Los jugadores se turnan según un orden predeterminado.</p>
           <p>• Se lanza un dado de 6 caras al principio de cada turno para determinar las casillas a avanzar.</p>
-          <p>• Cada turno tiene un límite de tiempo de 100 segundos.</p>
+          <p>• Cada turno tiene un límite de tiempo de 20 segundos.</p>
         </div>
         <div>
           <h1>Sistema de Monedas</h1>
@@ -51,11 +51,7 @@ function Rules() {
           <p>• El tablero está compuesto por 3 tipos de casillas: verde (minijuego), azul (ganar monedas) y rojo (perder monedas).</p>
           <p>• Al caer en una casilla verde, se activará un minijuego al azar, cuyo ganador obtendrá 1 estrella.</p>
         </div>
-        <div>
-          <h1>Minijuegos</h1>
-          <p>• Mini torneo de Card Jitsu.</p>
-          <p id='minigame'>El mini torneo de Card Jitsu es un juego de cartas para 4 jugadores. Al inicio, se establecen los enfrentamientos y cada jugador recibe 5 cartas. Cada carta tiene un tipo (agua, fuego o hielo) y un poder. El fuego vence a la nieve, la nieve al agua y el agua al fuego. Si las cartas son del mismo tipo, gana la de mayor poder. Cada turno tiene un límite de tiempo de 20 segundos para seleccionar una carta. El objetivo es eliminar las vidas de los oponentes para avanzar en el torneo y ganar una estrella.</p>
-        </div>
+        
         <div>
           <h1>Minijuegos</h1>
           <p>• Flappy bird por turnos.</p>
@@ -85,8 +81,7 @@ function Rules() {
         <div>
           <h1>Empates</h1>
           <p>• En caso de existir empate por estrellas al finalizar el turno 10 el resultado será determinado de la siguiente forma:</p>
-          <p id ='minigame'>- En el caso de 2 jugadores una final de Card Jitsu.</p>
-          <p id ='minigame'>- En el caso de 3 o 4 jugadores una partida de Flappy Bird</p>
+          <p id ='minigame'>- En cualquier caso la final será una partida de Flappy Bird con los jugadores empatados.</p>
           <p>El ganador del minijuego final, será el ganador de la partida.</p>
         </div>
       </Carousel>

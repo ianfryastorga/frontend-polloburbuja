@@ -439,8 +439,7 @@ function Tablero() {
           <img className='patricio' src={patricio} alt='fuego'/>
           <span className='overlay-text'>10 MONEDAS</span>
         </div>
-        
-      
+  
 
     
 
@@ -449,9 +448,17 @@ function Tablero() {
               <img className='salir' src={salir} alt='salir' onClick={handleSalirClick} />
               <span className='overlay-text'>SALIR</span>
             </div>
+    
           </>
+          
+        )}
+              
+        {dadoVisible && (
+          <img className={`dado-jugable ${rollingDice ? 'rolling' : ''}`}
+          src={image} alt='dado' />
         )}
       </div>
+    
     </div>
 
     
