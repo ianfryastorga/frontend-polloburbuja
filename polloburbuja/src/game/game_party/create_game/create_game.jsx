@@ -13,7 +13,7 @@ import clashroyale from '../../../assets/img/clash royale.png';
 import bugs from '../../../assets/img/bugs bunny.png';
 
 const characters = [
-  {name: 'Among us', img: amongus},
+  {name: 'Among Us', img: amongus},
   {name: 'Angry Birds', img: angrybirds},
   {name: 'Baby Yoda', img: baby_yoda},
   {name: 'Patricio', img: patricio},
