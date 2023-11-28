@@ -219,11 +219,13 @@ function Tablero() {
             if (nuevaPosicion >= 29) {
               nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
             }
+            
             console.log([prevPosicion.i, prevPosicion.j]);
             if (colores[prevPosicion.i, prevPosicion.j] === 'verde') {
               const minijuegoSeleccionado = Math.random() < 0.5 ? 'flappy_bird' : 'pro_reflex';
               navigate(`${minijuegoSeleccionado}`);
             }
+
             return posiciones[nuevaPosicion];
           });
           
@@ -258,6 +260,7 @@ function Tablero() {
               const minijuegoSeleccionado = Math.random() < 0.5 ? 'flappy_bird' : 'pro_reflex';
               navigate(`${minijuegoSeleccionado}`);
             }
+
             return posiciones[nuevaPosicion];
           });
         } else if (jugadorActual === 4) {
@@ -407,8 +410,6 @@ function Tablero() {
             </div>
           </>
         )}        
-
-
       
         {/* Renderiza la interfaz de potenciadores */}
             {/* Renderiza potenciadores */}
