@@ -56,7 +56,6 @@ function Tablero() {
            setDatosDelTablero(response.data); }
         // } else {
         //   console.error('Los datos del tablero no son un array:', response.data);
-        
       } catch (error) {
         console.error('Error al obtener datos del tablero:', error);
       }
@@ -192,11 +191,11 @@ function Tablero() {
     setInterfaz('potenciadores');
   };
 
-  const handleDadoClick = () => {
+  const handleDadoClick = async () => {
     setRollingDice(true);
     if (!dadoLanzado) {
       setDadoLanzado(true);
-
+       
       let randomNum;
     
       let animationTimeout = setTimeout(() => {
@@ -205,7 +204,7 @@ function Tablero() {
           setImage(diceImages[randomNum]);
         }, 100);
     
-        setTimeout(() => {
+        setTimeout(async () => {
           clearInterval(interval);
           setRollingDice(false);
 
@@ -241,7 +240,6 @@ function Tablero() {
               const minijuegoSeleccionado = Math.random() < 0.5 ? 'flappy_bird' : 'pro_reflex';
               navigate(`${minijuegoSeleccionado}`);
             }
-
             return posiciones[nuevaPosicion];
 
           });
@@ -260,7 +258,6 @@ function Tablero() {
               const minijuegoSeleccionado = Math.random() < 0.5 ? 'flappy_bird' : 'pro_reflex';
               navigate(`${minijuegoSeleccionado}`);
             }
-
             return posiciones[nuevaPosicion];
           });
         } else if (jugadorActual === 4) {
@@ -277,7 +274,6 @@ function Tablero() {
               const minijuegoSeleccionado = Math.random() < 0.5 ? 'flappy_bird' : 'pro_reflex';
               navigate(`${minijuegoSeleccionado}`);
             }
-
             return posiciones[nuevaPosicion];
           });
         }
@@ -322,6 +318,31 @@ function Tablero() {
   }; 
 
   
+
+  const handlePlayerMove = async (jugadorActual, prevPosicion) => {
+    let nuevaPosicion = prevPosicion.i * 7 + prevPosicion.j + randomNum + 1;
+    if (nuevaPosicion >= 29) {
+      nuevaPosicion = randomNum - (28 - (prevPosicion.i * 7 + prevPosicion.j + 1));
+    }
+    console.log(nuevaPosicion);
+  
+    try {
+      // Realizar la solicitud POST al backend con el jugador actual y la nueva posición
+      const response = await axios.post('http://localhost:3000/boards/realizarJugada', {
+        jugadorActual: jugadorActual,
+        nuevaPosicion: nuevaPosicion,
+      });
+  
+      console.log('Response Status:', response.status);
+      console.log('Response Data:', response.data);
+    
+    } catch (error) {
+      console.error('Error Status:', error.response.status);
+      console.error('Error Data:', error.response.data);
+    }
+  
+    return posiciones[nuevaPosicion];
+  };
   const handleSalirClick = () => {
     setInterfaz('normal');
   };
@@ -331,6 +352,8 @@ function Tablero() {
     <Layout>
     <div className='contenedor'>
       <div className='tablero'>
+
+        
         {/* Renderiza jugadores y casillas */}
         {datosDelTablero && (
         datosDelTablero.map((jugador, index) => (
@@ -348,10 +371,18 @@ function Tablero() {
           </div>
         ))
       )}
+      
+
+      
 
         {/* Renderiza casillas */}
         {casillas}
       </div>
+
+
+
+
+      
 
       <div className='interfaz'>
         {/* Renderiza la interfaz normal */}
@@ -375,10 +406,13 @@ function Tablero() {
               {timer}
             </div>
           </>
-        )}
+        )}        
 
+
+      
         {/* Renderiza la interfaz de potenciadores */}
-        {interfaz === 'potenciadores' && (
+            {/* Renderiza potenciadores */}
+            {interfaz === 'potenciadores' && (
         <>
         <div className='overlay'>
           <img className='fuego' src={fuego} alt='fuego'/>
@@ -418,9 +452,10 @@ function Tablero() {
         )}
       </div>
     </div>
+
+    
   </Layout>
   );
 }
 
 export default Tablero;
-
